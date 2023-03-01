@@ -31,8 +31,8 @@ void run_as_client()
 {
     ad::sockets::socket sock;
     sock.connect("127.0.0.1", 8080);
-    sock.send("Hello");
-    std::string response = sock.recv();
+    sock.send(std::string_view { "Hello" });
+    std::string response = sock.recv<std::string, 1024>();
     spdlog::info("Response: {}", response);
     sock.close();
     spdlog::info("Closed socket (client side)");

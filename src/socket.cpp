@@ -66,20 +66,18 @@ void socket::connect(std::string_view address, uint16_t port) noexcept(false)
 
 void socket::close() noexcept { ::close(_native); }
 
-void socket::send(std::string_view data) noexcept(false)
+void socket::send_all(const void* data, size_t size) noexcept(false)
 {
     std::size_t bytes_transmitted =
-        ::send(_native, data.data(), data.size(), 0);
+        ::send(_native, data, size, 0);
     std::cout << "Bytes transmitted " << bytes_transmitted << " from actual "
-              << data.size() << std::endl;
+              << size << std::endl;
 }
 
-std::string socket::recv() noexcept(false)
+void socket::recv_all(void* data, size_t size) noexcept(false)
 {
-    char buffer[ 1024 ];
-    std::size_t bytes_received = ::recv(_native, buffer, 1024, 0);
+    std::size_t bytes_received = ::recv(_native, data, size, 0);
     std::cout << "Bytes received " << bytes_received << std::endl;
-    return std::string(buffer, bytes_received);
 }
 
 void socket::init(socket_type type) noexcept(false)
