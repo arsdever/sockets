@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb)",
+            "type": "lldb",
+            "request": "launch",
+            // Resolved by CMake Tools:
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [
+                "client",
+            ],
+            "stopOnEntry": false,
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PATH": "$PATH:${command:cmake.launchTargetDirectory}",
+                "OTHER_VALUE": "Something something",
+            },
+            "console": "integratedTerminal",
+        }
+    ]
+}
